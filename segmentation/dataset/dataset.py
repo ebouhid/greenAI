@@ -35,8 +35,17 @@ class XinguDataset(Dataset):
         for img_scene in self.image_paths:
             id = int((img_scene.split('_')[-1].split('.')[0])[1:])
             if id in regions:
-                self.images.append(
+                # get file extension
+                ext = img_scene.split('.')[-1]
+                if ext == 'npy':
+                    self.images.append(
                     np.load(os.path.join(self.img_path, img_scene)))
+                elif ext == 'png':
+                    self.images.append(
+                    np.asarray(
+                        Image.open(os.path.join(self.img_path, img_scene))))
+                else:
+                    raise Exception('Invalid file extension')
 
         for msk_scene in self.mask_paths:
             id = int((msk_scene.split('_')[-1].split('.')[0])[1:])
