@@ -21,6 +21,9 @@ nohup python deeplab.py --composition 8 7 6 5 4 3 2 1 \
 --composition_name "All+NDVI" \
 --batch_size 32 \
 --encoder "resnet101" \
+--experiment_name "Encoder_Comparison"
+
+wait
 
 # 3 bands (651) composition
 nohup python deeplab.py --composition 6 5 1 \
